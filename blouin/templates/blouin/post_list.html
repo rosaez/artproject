@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Artbrain</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static "css/blog.css" %}">
+    </head>
+    <body>
+        <div class="page-header">
+            <h1><a href="/">Artvía</a></h1>
+        </div>
+        
+{% if painting_list %}
+    <ul>
+    {% for post in painting_list %}
+        <li>
+            {% if post.image1 %}
+                <img src= {{ post.image1.url }} alt="Painting Image" style="width:304px;height:228px;">
+             {% endif %}
+            <span>{{ post.painter }}</span>
+            <span>{{ post.title }}</span>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No post is made during the past two days.</p>
+{% endif %}

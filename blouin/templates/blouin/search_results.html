@@ -1,0 +1,119 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Artvia</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static "css/blog.css" %}">
+    </head>
+    <body>
+        <div class="page-header ">
+            <h1><a href="/">Artvía</a></h1>
+        </div>
+<div class="lot col-xs-12 col-sm-10" >
+<a href='/blouin/search/'>return to search</a>
+<!-- <p>You searched for: <strong>{{ query }}</strong></p> -->
+</div>
+<div class="lot col-xs-12 col-sm-10" >
+<h2>Estimated price:</h2>
+<p>
+<h2>US {{ estimation_results }}</h2>
+</p>
+
+</div>
+<hr>
+{% if paintings %}
+<div class="lot col-xs-12 col-sm-10" >
+<h2>Similar paintings found:</h2>
+</div>
+    {% for painting in paintings %}
+<div class="lot col-xs-12">
+  <div class="row">
+    <div class="col-xs-4 col-sm-4 text-center pad pad-b-15">
+      <p>
+       id: {{ painting.id }}
+      </p>
+
+    {% if painting.image1 %}
+      <a class="lot_detail_6969893" href=""><img src= {{ painting.image1.url }} class="shadow" src=  alt="1"></a>
+    {% else %}
+    <a class="lot_detail_6969893" href=""><img src= {{ no_image.url }} class="shadow" src=  alt="1"></a>
+    {% endif %}
+    </div>
+
+    <div class="col-xs-8 col-sm-4" style="position:relative; top:35px; height:0;">
+      <p>
+            <a href="" title=>
+              {{ painting.title }} 
+            </a>
+            <date>
+              {{ painting.year }}
+            </date>
+      </p>
+      <p>
+      {{ painting.painter }}
+      </p>
+      <p>
+        {{ painting.materials }},
+            <span ng-show="unite_to == 'in'" class="ng-hide"> Height: {{ painting.height }}</span>
+            <span ng-show="unite_to == 'cm'">Width: {{ painting.width }}</span>
+      </p>
+          <p>
+                Estimate:
+              <span >
+              {{painting.low_estimate}} - {{painting.high_estimate}}
+                  </span>
+              <span ng-show="currency == 'USD'" class="ng-hide">
+              
+                  </span>
+              <span ng-show="currency == 'GBP'" class="ng-hide">
+              
+                  </span>
+            </p>
+          <p>
+                <strong>
+                Adjusted premium price:
+               <span ng-show="currency == 'EUR'">
+              
+                 </span>
+
+              <span ng-show="currency == 'USD'" class="ng-hide">
+                $ {{painting.new_price}}
+                 </span>
+
+              <span ng-show="currency == 'GBP'" class="ng-hide">
+        
+                 </span>
+
+                  
+                </strong>
+          </p>
+    </div>
+    <div class="col-xs-8 col-xs-offset-4 col-sm-4 col-sm-offset-0" style="position:relative; top:35px; height:0;">
+      <p>
+      {{painting.lot}},
+      </p>
+<!--       <form action="#" method="get">
+      <input type="text" value="8" name="mytextbox" size="1"/>
+      <input type="submit" class="btn" value="Click" name="mybtn">
+      </form> -->
+      <form action="/blouin/estimation/" method="get">
+      <input type="submit" name = 'list' value="adjust value">
+      </form> 
+      <!-- <form action="/blouin/estimation/" method="POST">
+        <input id="submit" name = 'list' type="button" value="adjust quality" /> -->
+      <!-- <button  class="btn btn-mini btn-inverse" name="list" action="/blouin/estimation/" method="get" type="button" value="Submit"> Adjust quality </button>
+      </form> -->
+    </div>
+  <hr>
+  </div>
+</div>
+    {% endfor %}
+{% else %}
+    <p>No paintings matched your search criteria.</p>
+{% endif %}
+
+</body>
+</html>

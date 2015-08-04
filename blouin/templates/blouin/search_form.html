@@ -1,0 +1,54 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Artvia</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static "css/blog.css" %}">
+    </head>
+    <body>
+        <div class="page-header">
+            <h1><a href="/">Artvía</a></h1>
+        </div>
+        {% if error %}
+        <p></p>
+    {% endif %}
+    <div>
+    <h3>&nbsp &nbsp Select Painting Characteristics:<h3>
+        <div class="row">
+            <div class="col-md-offset-4 col-md-4 col-sm-12">
+
+        <form action="/blouin/search/" method="get" style="width: 100%; text-align: center;">
+        <table style="text-align: left;">
+        <tr><td>
+            <label for="painter">Artist: &nbsp &nbsp &nbsp </label></td><td>
+            <input id="painter" type="text" name="painter" value="{{ painter }}"></td>
+        <tr><td>
+            <label for="year">Year:&nbsp &nbsp &nbsp &nbsp</label></td><td>
+            <input id="year" type="number" name="year" value="{{ year }}"></td>
+        <tr><td>
+            <label for="height">Height: &nbsp &nbsp</label></td><td>
+            <input id="height" type="number" name="height" value="{{ height }}"></td>
+        <tr><td>
+            <label for="width">Width:&nbsp &nbsp &nbsp </label></td><td>
+            <input id="width" type="number" name="width" value="{{ width }}"></td>
+        <tr><td>
+            <label for="materials">Materials:</label></td><td>
+            <input id="materials" type="text" name="materials" value="{{ materials }}"></td>
+        <tr><td>
+            <label for="quality">Quality:&nbsp &nbsp </label></td><td>
+            <input id="quality" type="text" name="quality" value="{{ quality }}"></td>
+        <tr><td colspan="2" style="text-align: center"><input type="submit" value="Search"></td></tr>
+        </table>
+
+            </div>
+        </div>
+    </div> 
+
+         </form> 
+
+    <h1>{{ question.question_text }}</h1>
+    </body>
+</html>
